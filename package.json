@@ -1,9 +1,9 @@
 {
-  "name": "accessible-astro-starter",
-  "description": "An Accessible Starter Theme for Astro including several accessibility features and tools to help you build faster.",
+  "name": "backland-talent",
+  "description": "A freelance talent network for world-class cybersecurity practitioners.",
   "version": "3.1.2",
-  "author": "Mark Teekman",
-  "homepage": "https://accessible-astro.netlify.app/",
+  "author": "Max Krueger",
+  "homepage": "https://backlandtalent.com",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -31,5 +31,9 @@
     "sass": "^1.49.9",
     "svgo": "^3.2.0",
     "tailwindcss": "^3.2.7"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "astro-robots": "^2.2.0"
   }
 }

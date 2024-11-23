@@ -4,10 +4,14 @@ import tailwind from '@astrojs/tailwind'
 import compress from 'astro-compress'
 import icon from "astro-icon"
 
+import robots from 'astro-robots';
+
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
   compressHTML: true,
   integrations: [mdx(), icon(), tailwind({
     applyBaseStyles: false,
-  }), compress()],
+  }), compress(), robots(), sitemap()],
 })
