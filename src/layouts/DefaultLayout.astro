@@ -8,7 +8,7 @@ import Footer from '../components/Footer.astro'
 const {
   title = 'Backland Talent',
   description = 'A talent network for world-class cybersecurity practitioners.',
-  url,
+  url = "https://backlandtalent.com",
   image = '/social-preview-image.png',
   author = 'Backland Labs',
 } = Astro.props
@@ -26,9 +26,7 @@ const {
     <SiteMeta
       title={title}
       description={description.substring(0, 100)}
-      url={Astro.site
-        ? `${Astro.site}/${title.toLowerCase().replaceAll(' ', '-')}`
-        : `https://accessible-astro.dev/${title.toLowerCase().replaceAll(' ', '-')}`}
+      url={url}
       image={image}
       author={author}
     />
