@@ -1,31 +1,46 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { Icon } from 'astro-icon/components';
 
-const { src = '/astronaut-hero-img.webp' } = Astro.props
+interface Props {
+  src?: string;
+}
+
+const { src = '/astronaut-hero-img.webp' } = Astro.props;
 ---
 
-<section class="hero my-24">
-  <div class="container">
-    <div class="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
-      <div class="flex flex-col items-center gap-8 md:items-start">
-        <h1 class="text-center text-6xl md:text-left lg:text-8xl">
-          <slot><span class="text-gradient">Accessible</span> Starter for Astro</slot>
+<section class="relative overflow-hidden py-16 md:py-24">
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
+      <div class="flex flex-col items-center space-y-6 text-center lg:items-start lg:text-left">
+        <h1 class="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl xl:text-7xl">
+          <slot>
+            <span class="text-gradient">World-class talent.</span>
+            <span class="mt-2 block text-gray-900 dark:text-white">Mission-critical security.</span>
+          </slot>
         </h1>
-        <div class="flex flex-col gap-3 min-[500px]:flex-row">
-          <a class="button has-icon" href="https://github.com/markteekman/accessible-astro-starter">
-            <Icon name="ion:star-outline" />
-            Star on GitHub
-          </a>
-          <a
-            class="button has-icon color-secondary"
-            href="https://github.com/markteekman/accessible-astro-starter/blob/main/README.md"
-          >
-            <Icon name="ion:bookmark-outline" />
-            Read the Docs
+        <p class="max-w-lg text-lg text-gray-600 dark:text-gray-300">
+          Home to the world's top cybersecurity talent working on the most cutting edge cybersecurity challenges.
+        </p>
+        <div class="flex flex-col gap-4 sm:flex-row">
+          <a href="/get-started" class="button button-primary">
+            Apply Now
+            <Icon name="mdi:arrow-right" class="h-6 w-6" />
           </a>
         </div>
       </div>
-      <img class="hidden lg:block" src={src} alt="" decoding="async" />
+
+      <div class="relative mt-8 lg:mt-0">
+        <div class="image-container">
+          <div class="blob-background"></div>
+          <img
+            src={src}
+            alt="Astronaut sitting on a golden moon"
+            class="relative z-10 h-full w-full object-contain opacity-0 transition-opacity duration-500 loaded:opacity-100"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -36,12 +51,70 @@ const { src = '/astronaut-hero-img.webp' } = Astro.props
     background-clip: border-box;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    
+    :global(.darkmode) & {
+      background: linear-gradient(315deg, var(--primary-200) 25%, var(--secondary-400));
+    }
   }
 
-  :global(.darkmode .text-gradient) {
-    background: linear-gradient(315deg, var(--primary-200) 25%, var(--secondary-400));
-    background-clip: border-box;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .button {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-8 py-3 text-base font-medium transition-all duration-200;
+    
+    &-primary {
+      @apply bg-purple-600 text-white shadow-lg hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600;
+    }
+    
+    &-secondary {
+      @apply border border-gray-300 bg-purple-100 hover:bg-purple-200 dark:border-gray-700 dark:bg-purple-900/30 dark:hover:bg-purple-800/40;
+    }
+  }
+
+  .image-container {
+    @apply relative aspect-square w-full max-w-[600px] mx-auto;
+    perspective: 1000px;
+  }
+
+  .blob-background {
+    @apply absolute inset-0 z-0;
+    background: radial-gradient(circle at 50% 50%, 
+      rgba(226, 232, 240, 0.8) 0%,
+      rgba(203, 213, 225, 0.6) 30%,
+      rgba(148, 163, 184, 0.4) 60%,
+      rgba(100, 116, 139, 0.2) 90%
+    );
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000'%3E%3Cpath d='M885.5,304.5Q821,609,530.5,676.5Q240,744,182,372Q124,0,467.5,97Q811,194,880.5,347Q950,500,885.5,304.5Z' /%3E%3C/svg%3E");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    
+    :global(.darkmode) & {
+      background: radial-gradient(circle at 50% 50%, 
+        rgba(30, 41, 59, 0.8) 0%,
+        rgba(51, 65, 85, 0.6) 30%,
+        rgba(71, 85, 105, 0.4) 60%,
+        rgba(100, 116, 139, 0.2) 90%
+      );
+    }
+  }
+
+  // Image loading animation
+  .loaded {
+    @apply opacity-100;
   }
 </style>
+
+<script>
+  // Add loading animation to images
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('img[loading="eager"]');
+    images.forEach(img => {
+      if (img.complete) {
+        img.classList.add('loaded');
+      } else {
+        img.addEventListener('load', () => {
+          img.classList.add('loaded');
+        });
+      }
+    });
+  });
+</script>
