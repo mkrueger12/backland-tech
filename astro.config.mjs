@@ -11,6 +11,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   compressHTML: true,
+  site: 'https://backlandtalent.com',
   integrations: [mdx(), icon(), tailwind({
     applyBaseStyles: false,
   }), compress(), robots(), sitemap()],
