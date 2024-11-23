@@ -1,14 +1,16 @@
 // | -------------------------------------------------------------
-// | Globals
+// | Global Styles Configuration
 // | -------------------------------------------------------------
 
-@use 'base/reset';
-@use 'base/root';
-@use 'base/font';
-@use 'base/list';
-@use 'base/container';
-@use 'base/breakpoint';
-@use 'base/button';
-@use 'base/color';
-@use 'base/outline';
-@use 'base/space-content';
+// Base Styles
+// -------------------------------------------------------------
+@use 'base/reset' as *;        // CSS Reset/Normalize
+@use 'base/root' as *;         // Root variables and custom properties
+@use 'base/font' as *;         // Typography settings
+@use 'base/list' as *;         // List styles
+@use 'base/container' as *;    // Container layouts
+@use 'base/breakpoint' as *;   // Responsive breakpoints
+@use 'base/button' as *;       // Button components
+@use 'base/color' as *;        // Color system
+@use 'base/outline' as *;      // Focus/outline styles
+@use 'base/space-content' as *; // Spacing utilities

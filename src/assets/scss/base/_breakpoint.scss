@@ -1,25 +1,31 @@
+@use 'sass:map';
+@use 'sass:meta';
+
 // | -------------------------------------------------------------
-// | Breakpoint
+// | Breakpoint System
 // | -------------------------------------------------------------
 
+/// @type Map
 $breakpoints: (
-  "default": 0,
-  "small": 24em,
-  "medium": 48em,
-  "large": 75em
+  'default': 0,
+  'small': 24em,
+  'medium': 48em,
+  'large': 75em
 ) !default;
 
+/// Breakpoint mixin that handles responsive design breakpoints
+/// @param {String | Number} $breakpoint - Breakpoint name or direct pixel/em value
+/// @throws Error if breakpoint name is not found in $breakpoints map
 @mixin breakpoint($breakpoint) {
-  @if map-has-key($breakpoints, $breakpoint) {
-    @media (min-width: map-get($breakpoints, $breakpoint)) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
       @content;
     }
-  } @else if (type_of($breakpoint) == number) {
-    @media (min-width: $breakpoint+"px") {
+  } @else if meta.type-of($breakpoint) == number {
+    @media (min-width: #{$breakpoint}px) {
       @content;
     }
-  }
-  @else {
-    @error "Not a correct value, check _base-breakpoints for available values.";
+  } @else {
+    @error 'Invalid breakpoint: #{$breakpoint}. Check $breakpoints map for available values.';
   }
 }
