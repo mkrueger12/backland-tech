@@ -1,9 +1,9 @@
 {
-  "name": "backland-talent",
-  "description": "A freelance talent network for world-class cybersecurity practitioners.",
+  "name": "backland-tech",
+  "description": "Backland Technolgies is a modern IT managed service provider for forward-thinking businesses.",
   "version": "3.1.2",
   "author": "Max Krueger",
-  "homepage": "https://backlandtalent.com",
+  "homepage": "https://backlandtech.com",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
